@@ -13,6 +13,8 @@
 
     @livewire('counter')
 
+    @livewire('comments')
+
     @livewireScripts
     
 </body>
