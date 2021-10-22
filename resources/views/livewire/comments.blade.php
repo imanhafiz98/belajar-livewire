@@ -1,14 +1,20 @@
 <div class="flex justify-center">
     <div class="w-6/12">
         <h1 class="my-10 text-3xl">Comments</h1>
-        <div class="my-4 flex">
+        <form class="my-4 flex" wire:submit.prevent="addComment">
             <!-- {{$newComment}} -->
+
+            <!-- debounce will give ajax response after every 500ms -->
+            <!-- <input type="text" class="w-full rounded broder shaow p-2 mr-2 my-2" placeholder="What's in your mind."
+                wire:model.debounce.500ms="newComment"> -->
+
+            <!-- lazy will give ajax response after it click to others or lost focus -->
             <input type="text" class="w-full rounded broder shaow p-2 mr-2 my-2" placeholder="What's in your mind."
-                wire:model="newComment">
+                wire:model.lazy="newComment">
             <div class="py-2">
-                <button class="p-2 bg-blue-500 w-20 rounded shadow text-white" wire:click="addComment">Add</button>
+                <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Add</button>
             </div>
-        </div>
+        </form>
 
         @foreach($comments as $comment)
         <div class="rounded broder shadow p-3 my-2">
