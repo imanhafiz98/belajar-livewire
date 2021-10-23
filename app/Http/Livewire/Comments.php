@@ -34,6 +34,8 @@ class Comments extends Component
         $this->comments->prepend($createdComment);
 
         $this->newComment = "";
+
+        session()->flash('message', 'Comment added ssuccessfully ');
         
         // $this->comments[] = [
 
@@ -63,8 +65,10 @@ class Comments extends Component
         $comment = Comment::find($commentId);
 
         $comment->delete();
-        
+
         $this->comments = $this->comments->except($commentId);
+
+        session()->flash('message', 'Comment delected ssuccessfully ');
 
     }
 
