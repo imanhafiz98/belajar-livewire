@@ -17,7 +17,7 @@
 
     @livewire('counter')
 
-    <livewire:comments :initialComments = "$comments" />
+    <livewire:comments />
 
     @livewireScripts
     
