@@ -43,6 +43,11 @@ class Comments extends Component
         // ];
     }
 
+    public function mount()
+    {
+        $this->newComment = 'I am from mounted function';
+    }
+
     public function render()
     {
         return view('livewire.comments');
