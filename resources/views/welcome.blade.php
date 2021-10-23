@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +10,17 @@
     <title>Livewire</title>
 
     @livewireStyles
+
 </head>
+
 <body>
 
     @livewire('counter')
 
-    @livewire('comments')
+    <livewire:comments :initialComments = "$comments" />
 
     @livewireScripts
     
 </body>
+
 </html>

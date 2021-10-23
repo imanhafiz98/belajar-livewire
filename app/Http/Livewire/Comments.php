@@ -4,17 +4,19 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Carbon\Carbon;
+use App\Models\Comment;
 
 class Comments extends Component
 {
-    public $comments = [
-        [
-            'body' => 'adasdsad sdasdasdasd asdasdasdasdasd.',
-            'created_at' => '3 min ago',
-            'creator' => 'Iman'
-        ]
+    public $comments;
+    // public $comments = [
+    //     [
+    //         'body' => 'adasdsad sdasdasdasd asdasdasdasdasd.',
+    //         'created_at' => '3 min ago',
+    //         'creator' => 'Iman'
+    //     ]
 
-    ];
+    // ];
 
     public $newComment;
 
@@ -45,7 +47,11 @@ class Comments extends Component
 
     public function mount()
     {
-        $this->newComment = 'I am from mounted function';
+        //dd($initialComments);
+
+        $initialComments = Comment::all();
+        $this->comments = $initialComments;
+
     }
 
     public function render()
