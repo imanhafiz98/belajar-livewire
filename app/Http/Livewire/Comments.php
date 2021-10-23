@@ -28,11 +28,14 @@ class Comments extends Component
 
         }
 
-        array_unshift($this->comments, [
-            'body' => $this->newComment,
-            'created_at' => Carbon::now()->diffForHumans(),
-            'creator' => 'Hafiz'
+        $createdComment = Comment::create([
+
+            'body' => $this->newComment, 
+            'user_id'=>1
+
         ]);
+
+        $this->comments->prepend($createdComment);
 
         $this->newComment = "";
         
@@ -49,7 +52,7 @@ class Comments extends Component
     {
         //dd($initialComments);
 
-        $initialComments = Comment::all();
+        $initialComments = Comment::latest()->get();
         $this->comments = $initialComments;
 
     }
