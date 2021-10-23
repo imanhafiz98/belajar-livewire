@@ -3,12 +3,14 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use Carbon\Carbon;
 use App\Models\Comment;
 
 class Comments extends Component
 {
-    public $comments;
+    use WithPagination;
+
     // public $comments = [
     //     [
     //         'body' => 'adasdsad sdasdasdasd asdasdasdasdasd.',
@@ -31,7 +33,7 @@ class Comments extends Component
 
         ]);
 
-        $this->comments->prepend($createdComment);
+        
 
         $this->newComment = "";
 
@@ -46,15 +48,6 @@ class Comments extends Component
         // ];
     }
 
-    public function mount()
-    {
-        //dd($initialComments);
-
-        $initialComments = Comment::latest()->get();
-        $this->comments = $initialComments;
-
-    }
-
     public function updated($field)
     {
         $this->validateOnly($field, ['newComment' => 'required|max:10']);
@@ -66,7 +59,7 @@ class Comments extends Component
 
         $comment->delete();
 
-        $this->comments = $this->comments->except($commentId);
+        
 
         session()->flash('message', 'Comment delected ssuccessfully ');
 
@@ -74,7 +67,11 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.comments');
+        return view('livewire.comments', [
+
+            'comments' => Comment::latest()->paginate(2)
+
+        ]);
     }
 
 }
