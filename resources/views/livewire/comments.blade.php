@@ -23,6 +23,8 @@
                 <p class="font-bold text-lg">{{$comment->creator->name}}</p>
                 <p class="mx-3 py-1 text-xs text-gray-500 font-semibold">{{$comment->created_at}}</p>
             </div>
+            <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer"
+                wire:click="remove({{$comment->id}})"></i>
             <p class="text=gray-800">{{$comment->body}}</p>
         </div>
         @endforeach
