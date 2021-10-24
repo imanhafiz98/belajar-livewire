@@ -14,6 +14,8 @@
 
     @livewireStyles
 
+    @livewireScripts
+
 </head>
 
 <body>
@@ -21,8 +23,6 @@
     @livewire('counter')
 
     <livewire:comments />
-
-    @livewireScripts
 
 </body>
 

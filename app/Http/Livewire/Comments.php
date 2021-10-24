@@ -4,12 +4,14 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use App\Models\Comment;
 
 class Comments extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     // public $comments = [
     //     [
@@ -21,6 +23,15 @@ class Comments extends Component
     // ];
 
     public $newComment;
+    public $image;
+
+    protected $listeners = ['fileUpload' => 'handleFileUpload'];
+
+    public function handleFileUpload($imageData)
+    {
+        //dd($imageData);
+        $this->image = $imageData;
+    }
 
     public function addComment()
     {
@@ -32,8 +43,6 @@ class Comments extends Component
             'user_id'=>1
 
         ]);
-
-        
 
         $this->newComment = "";
 

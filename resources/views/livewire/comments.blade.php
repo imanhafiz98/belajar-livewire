@@ -10,6 +10,17 @@
             </div>
             @endif
         </div>
+
+        <section>
+
+            @if($image)
+            <img src={{$image}} width="200" />
+            @endif
+
+            <input type="file" id="image" wire:change="$emit('fileChoosen')">
+
+        </section>
+
         <form class="my-4 flex" wire:submit.prevent="addComment">
             <!-- {{$newComment}} -->
 
@@ -40,3 +51,28 @@
         {{$comments->links('pagination-links')}}
     </div>
 </div>
+
+<script>
+    //console.log('window');
+
+    // Livewire.on('fileChoosen', () => {
+    //     alert('Berjaya');
+    // })
+
+    Livewire.on('fileChoosen', () => {
+        let inputField = document.getElementById('image')
+
+        file = inputField.files[0]
+
+        let reader = new FileReader();
+
+        reader.onloadend = () => {
+            //console.log(reader.result);
+            window.livewire.emit('fileUpload', reader.result)
+        }
+        //console.log(file.files[0]);
+
+        reader.readAsDataURL(file);
+    })
+
+</script>
