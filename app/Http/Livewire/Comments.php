@@ -7,12 +7,18 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use App\Models\Comment;
+use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManagerStatic;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class Comments extends Component
 {
     use WithPagination;
     use WithFileUploads;
-
+    
     // public $comments = [
     //     [
     //         'body' => 'adasdsad sdasdasdasd asdasdasdasdasd.',
@@ -37,14 +43,18 @@ class Comments extends Component
     {
         $this->validate(['newComment' => 'required|max:10']);
 
+        $image = $this->storeImage();
+
         $createdComment = Comment::create([
 
             'body' => $this->newComment, 
-            'user_id'=>1
+            'user_id' => 1,
+            'image' => $image
 
         ]);
 
         $this->newComment = "";
+        $this->image = "";
 
         session()->flash('message', 'Comment added ssuccessfully ');
         
@@ -66,9 +76,9 @@ class Comments extends Component
     {
         $comment = Comment::find($commentId);
 
-        $comment->delete();
+        Storage::disk('public')->delete($comment->image);
 
-        
+        $comment->delete();
 
         session()->flash('message', 'Comment delected ssuccessfully ');
 
@@ -81,6 +91,26 @@ class Comments extends Component
             'comments' => Comment::latest()->paginate(2)
 
         ]);
+    }
+
+    public function storeImage()
+    {
+        if(!$this->image){
+            return null;
+        }
+
+        $img = ImageManagerStatic::make($this->image)->encode('jpg');
+
+        $name = Str::random() . '.jpg';
+
+        Storage::disk('public')->put($name, $img);
+
+        return $name;
+    }
+
+    public function getImagePathAttribute()
+    {
+        return Storage::disk('public')->url($this->image);
     }
 
 }
