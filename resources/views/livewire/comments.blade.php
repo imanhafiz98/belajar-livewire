@@ -14,7 +14,7 @@
         <section>
 
             @if($image)
-            <img src={{$image}} width="200" />
+                <img src={{$image}} width="200" />
             @endif
 
             <input type="file" id="image" wire:change="$emit('fileChoosen')">
@@ -23,10 +23,6 @@
 
         <form class="my-4 flex" wire:submit.prevent="addComment">
             <!-- {{$newComment}} -->
-
-            <!-- debounce will give ajax response after every 500ms -->
-            <!-- <input type="text" class="w-full rounded broder shaow p-2 mr-2 my-2" placeholder="What's in your mind."
-                wire:model.debounce.500ms="newComment"> -->
 
             <!-- lazy will give ajax response after it click to others or lost focus -->
             <input type="text" class="w-full rounded broder shaow p-2 mr-2 my-2" placeholder="What's in your mind."

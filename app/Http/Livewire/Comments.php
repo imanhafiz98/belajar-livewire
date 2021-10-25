@@ -19,15 +19,6 @@ class Comments extends Component
     use WithPagination;
     use WithFileUploads;
     
-    // public $comments = [
-    //     [
-    //         'body' => 'adasdsad sdasdasdasd asdasdasdasdasd.',
-    //         'created_at' => '3 min ago',
-    //         'creator' => 'Iman'
-    //     ]
-
-    // ];
-
     public $newComment;
     public $image;
     public $ticketId;
@@ -59,17 +50,11 @@ class Comments extends Component
         ]);
 
         $this->newComment = "";
+        
         $this->image = "";
 
         session()->flash('message', 'Comment added ssuccessfully ');
         
-        // $this->comments[] = [
-
-        //     'body' => 'Hello World.',
-        //     'created_at' => '1 min ago',
-        //     'creator' => 'Hafiz'
-
-        // ];
     }
 
     public function updated($field)
@@ -87,15 +72,6 @@ class Comments extends Component
 
         session()->flash('message', 'Comment delected ssuccessfully ');
 
-    }
-
-    public function render()
-    {
-        return view('livewire.comments', [
-
-            'comments' => Comment::where('support_ticket_id', $this->ticketId)->latest()->paginate(2)
-
-        ]);
     }
 
     public function storeImage()
@@ -121,7 +97,13 @@ class Comments extends Component
     public function ticketSelected($ticketId)
     {
         $this->ticketId = $ticketId;
+    }
 
+    public function render()
+    {
+        return view('livewire.comments', [
+            'comments' => Comment::where('support_ticket_id', $this->ticketId)->latest()->paginate(2)
+        ]);
     }
 
 }
