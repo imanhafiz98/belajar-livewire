@@ -18,11 +18,23 @@
 
 </head>
 
-<body>
+<body class="flex justify-center">
+    <div class="w-10/12 my-10 flex">
+        <div class="w-5/12 rounded broder p-2">
 
-    @livewire('counter')
+            {{-- @livewire('counter') --}}
 
-    <livewire:comments />
+            <livewire:tickets />
+
+        </div>
+
+        <div class="w-7/12 mx-2 rounded broder p-2">
+
+            <livewire:comments />
+
+        </div>
+
+    </div>
 
 </body>
 
