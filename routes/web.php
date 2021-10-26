@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/' , App\Http\Livewire\Home::class);
+//Route::get('/' , App\Http\Livewire\Home::class);
 
-Route::get('/login' , App\Http\Livewire\Login::class);
+//Route::get('/login' , App\Http\Livewire\Login::class);
+
+//Route::get('home-2', [HomeController::class, 'index']);
+
+Route::get('/home-2', 'HomeController@index')->name('admin.services.index');

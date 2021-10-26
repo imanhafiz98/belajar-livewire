@@ -22,7 +22,7 @@
     <div class="w-10/12 my-10 flex">
         <div class="w-5/12 rounded broder p-2">
 
-            {{-- @livewire('counter') --}}
+            @livewire('counter')
 
             <livewire:tickets />
 
