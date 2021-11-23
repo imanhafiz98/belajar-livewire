@@ -31,7 +31,7 @@
                 <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Add</button>
             </div>
         </form>
-
+        
         @foreach($comments as $comment)
         <div class="rounded broder shadow p-3 my-2">
             <div class="flex justify-start my-2">

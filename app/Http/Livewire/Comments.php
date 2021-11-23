@@ -36,6 +36,7 @@ class Comments extends Component
 
     public function addComment()
     {
+        dd($this->name);
         $this->validate(['newComment' => 'required|max:10']);
 
         $image = $this->storeImage();
